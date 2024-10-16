@@ -10,29 +10,25 @@
             background-color: #f8f9fa;
             margin: 0;
             padding: 0;
+            display: flex; /* Flexbox untuk memposisikan kartu di tengah */
+            align-items: center; /* Vertikal */
+            justify-content: center; /* Horizontal */
+            height: 100vh; /* Memastikan body memiliki tinggi penuh */
         }
 
         .container {
             max-width: 1200px;
-            margin: 50px auto;
-            padding: 20px;
+            width: 100%; /* Memastikan kontainer tidak lebih lebar dari 100% */
+            margin: 20px; /* Memberikan sedikit ruang di semua sisi */
         }
 
         .card {
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            position: relative; /* For positioning the button */
+            position: relative;
             overflow: hidden;
-            padding-bottom: 50px; /* For spacing at the bottom */
-        }
-
-        .card-header {
-            background-color: #007bff;
-            color: white;
-            padding: 15px;
-            font-size: 1.5em;
-            text-align: center;
+            padding-bottom: 50px;
         }
 
         .card-body {
@@ -56,6 +52,7 @@
 
         h5 {
             margin-top: 0;
+            font-size: 1.8em; /* Ukuran font diperbesar */
         }
 
         p {
@@ -119,30 +116,26 @@
 
 <div class="container">
     <div class="card">
-        <div class="card-header">
-            Contact Us
-        </div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-6">
-                    <h5>Our Contact Information</h5>
-                    <p>Email: <a href="mailto:averroesrillo12@gmail.com">averroesrillo12@gmail.com</a></p> <!-- Mailto link -->
+                    <h5>Informasi Kontak</h5> <!-- Judul kontak lebih besar -->
+                    <p>Email: <a href="mailto:astikkominfojaktim@jsclab.id">astikkominfojaktim@jsclab.id</a></p>
                     <p>No. Telp: +62 896-3690-9084</p>
                     <p>Alamat: <b>Sudin Kominfotik Jakarta Timur</b>
                         Blok B1 lantai 3 Kantor Wali Kota Jakarta Timur RT.11, RT.11/RW.8, Pulo Gebang, Cakung, Kota Jakarta Timur, Jakarta 13950</p>
-                    <p>Follow us on:</p>
+                    <p>Ikuti Kami di:</p>
                     <ul>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">Instagram</a></li>
+                        <li><a href="https://www.facebook.com/share/p5zYJENEKwbkmtTK/">Facebook</a></li>
+                        <li><a href="https://www.youtube.com/@SudinKominfotikJakartaTimur">YouTube</a></li>
+                        <li><a href="https://www.instagram.com/kotajakartatimur?igsh=YW9vcjk1YW1nYnJx">Instagram</a></li>
                     </ul>
                 </div>
                 <div class="col-md-6 map">
-                    <h5>Our Location</h5>
                     <div class="map-container">
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.375639028955!2d106.94159487499026!3d-6.214090693773825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698d70059c8b3f%3A0x207cb9a26106d5f9!2sSudin%20Kominfotik%20Jakarta%20Timur!5e0!3m2!1sid!2sid!4v1729042655580!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" 
-                            allowfullscreen="" loading="lazy"></iframe>
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.375639028955!2d106.94159487499026!3d-6.214090693773825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698d70059c8b3f%3A0x207cb9a26106d5f9!2sSudin%20Kominfotik%20Jakarta%20Timur!5e0!3m2!1sid!2sid!4v1729042655580!5m2!1sid!2sid" 
+                            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>  
                 </div>
             </div>

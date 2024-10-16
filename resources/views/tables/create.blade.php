@@ -61,14 +61,16 @@
             transform: translateY(-2px);
         }
 
-        .form-control, .form-select {
+        .form-control,
+        .form-select {
             border-radius: 10px;
             border: 2px solid #e3e6f0;
             padding: 12px;
             transition: all 0.3s ease;
         }
 
-        .form-control:focus, .form-select:focus {
+        .form-control:focus,
+        .form-select:focus {
             border-color: #4e73df;
             box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
         }
@@ -110,8 +112,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         #fields .card {
@@ -147,7 +156,8 @@
 
                 <div id="errorContainer"></div>
 
-                <form id="tableForm" action="{{ route('tables.store') }}" method="POST" onsubmit="return validateForm()">
+                <form id="tableForm" action="{{ route('tables.store') }}" method="POST"
+                    onsubmit="return validateForm()">
                     @csrf
                     <div class="mb-4">
                         <label for="table_name" class="form-label">Nama Tabel</label>
@@ -162,7 +172,8 @@
                         <label for="description" class="form-label">Deskripsi</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="fas fa-align-left"></i></span>
-                            <textarea id="description" name="description" class="form-control" rows="3" placeholder="Deskripsi singkat tentang tabel ini">{{ old('description') }}</textarea>
+                            <textarea id="description" name="description" class="form-control" rows="3"
+                                placeholder="Deskripsi singkat tentang tabel ini">{{ old('description') }}</textarea>
                         </div>
                     </div>
 
@@ -184,9 +195,9 @@
         </div>
     </div>
 
-    <button class="btn btn-primary floating-action-button" onclick="addField()" title="Tambah Kolom Baru">
+    {{-- <button class="btn btn-primary floating-action-button" onclick="addField()" title="Tambah Kolom Baru">
         <i class="fas fa-plus"></i>
-    </button>
+    </button> --}}
 
     <div class="toast-container"></div>
 
@@ -242,7 +253,8 @@
             if (input.value.trim() === "") {
                 preview.textContent = "";
             } else {
-                preview.innerHTML = `<i class="fas fa-info-circle me-1"></i>Kolom akan dinamakan: <strong>${formattedName}</strong>`;
+                preview.innerHTML =
+                    `<i class="fas fa-info-circle me-1"></i>Kolom akan dinamakan: <strong>${formattedName}</strong>`;
             }
         }
 
@@ -262,18 +274,27 @@
             const errorContainer = document.getElementById('errorContainer');
             errorContainer.innerHTML = '';
 
+            // Check if table name is provided
             if (tableName === '') {
                 showError('Nama tabel harus diisi.');
                 return false;
             }
 
+            // Ensure at least one column is added
             if (fieldCount === 0) {
                 showError('Tambahkan setidaknya satu kolom untuk tabel.');
                 return false;
             }
 
+            // Replace spaces with underscores for column names before submission
+            document.querySelectorAll('.column-name').forEach(function(input) {
+                let formattedName = input.value.trim().replace(/\s+/g, '_');
+                input.value = formattedName;
+            });
+
             return true;
         }
+
 
         function showError(message) {
             const errorContainer = document.getElementById('errorContainer');

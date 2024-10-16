@@ -9,47 +9,109 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
-            background-color: #f8f9fa;
+    :root {
+        --primary-color: #4e73df;
+        --secondary-color: #858796;
+        --background-color: #f8f9fc;
+        --card-background: #ffffff;
+        --text-color: #5a5c69;
+    }
+
+    body {
+        background-color: var(--background-color);
+        font-family: 'Nunito', sans-serif;
+        color: var(--text-color);
+    }
+
+    .navbar {
+        background-color: var(--primary-color);
+        box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    }
+
+    .navbar-brand {
+        color: #ffffff;
+        font-weight: 700;
+    }
+
+    .card {
+        border: none;
+        border-radius: 0.75rem;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+        background-color: var(--card-background);
+    }
+
+    .card-title {
+        color: var(--primary-color);
+        font-weight: 700;
+    }
+
+    .btn-floating {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 100;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .btn-floating:hover {
+        transform: scale(1.1);
+    }
+
+    .filter-card {
+        background-color: #f1f3f9;
+        border-left: 5px solid var(--primary-color);
+    }
+
+    .chart-container {
+        position: relative;
+        margin: auto;
+        height: 350px;
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .chart-container {
+            height: 300px;
         }
+    }
+
+    .chart-wrapper {
+        transition: all 0.3s ease;
+    }
     
-        .card {
-            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-            border: none;
-            border-radius: 0.5rem;
-            padding: 10px; /* Mengurangi padding */
-        }
+    .chart-wrapper.full-width {
+        width: 100%;
+    }
     
-        .card.chart-card {
-            width: 100%; /* Menjaga ukuran yang responsif */
-            max-width: 600px; /* Membuat ukuran card lebih kecil */
-            margin: auto; /* Agar card berada di tengah */
-        }
-    
-        .card-title {
-            color: #0d6efd;
-            font-weight: bold;
-        }
-    
-        .btn-floating {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-        }
-    </style>
-    
+    .chart-container {
+        transition: height 0.3s ease;
+    }
+</style>
 </head>
 
 <body>
-    <div class="container mt-5">
-        <h1 class="text-center text-primary mb-5">Grafik Dinamis</h1>
+    <nav class="navbar navbar-expand-lg navbar-dark mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-chart-line me-2"></i>Grafik Dinamis
+            </a>
+        </div>
+    </nav>
 
-        <div class="card mb-4">
+    <div class="container">
+        <div class="card filter-card mb-4">
             <div class="card-body">
                 <h5 class="card-title mb-3">Filter Grafik</h5>
                 <div class="row g-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="monthFilter" class="form-label">Pilih Bulan</label>
                         <select id="monthFilter" class="form-select" onchange="updateCharts()">
                             <option value="">Semua Bulan</option>
@@ -58,11 +120,20 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="chartType" class="form-label">Jenis Grafik</label>
                         <select id="chartType" class="form-select" onchange="updateChartType()">
                             <option value="bar">Batang</option>
                             <option value="line">Garis</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="chartSelector" class="form-label">Pilih Chart</label>
+                        <select id="chartSelector" class="form-select" onchange="showSelectedChart()">
+                            <option value="all">Semua Chart</option>
+                            @foreach ($tables as $table)
+                                <option value="chart-{{ $table->id }}">{{ $table->table_name }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -71,11 +142,13 @@
 
         <div class="row" id="chartsContainer">
             @foreach ($tables as $table)
-                <div class="col-md-6 mb-4">
-                    <div class="card chart-card">
+                <div class="col-lg-6 mb-4 chart-wrapper" data-chart-id="chart-{{ $table->id }}">
+                    <div class="card h-100">
                         <div class="card-body">
-                            <h5 class="card-title">{{ $table->table_name }}</h5>
-                            <canvas id="chart-{{ $table->id }}" height="300"></canvas>
+                            <h5 class="card-title mb-3">{{ $table->table_name }}</h5>
+                            <div class="chart-container">
+                                <canvas id="chart-{{ $table->id }}"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -85,16 +158,16 @@
         <a href="javascript:void(0)" class="btn btn-primary btn-floating" onclick="history.back()">
             <i class="fas fa-arrow-left"></i>
         </a>
-
     </div>
 
     <script>
+        // Sisanya script JavaScript tetap sama seperti sebelumnya
         const charts = {};
         const colorPalette = [
-            ['#FF6384', '#FF9F40', '#FFCE56'], // Palette 1
-            ['#36A2EB', '#4BC0C0', '#9966FF'], // Palette 2
-            ['#FF9F40', '#FF6384', '#4BC0C0'], // Palette 3
-            ['#9966FF', '#36A2EB', '#FFCE56'], // Palette 4
+            ['#FF6384', '#FF9F40', '#FFCE56'],
+            ['#36A2EB', '#4BC0C0', '#9966FF'],
+            ['#FF9F40', '#FF6384', '#4BC0C0'],
+            ['#9966FF', '#36A2EB', '#FFCE56'],
         ];
 
         function getColorSet(index) {
@@ -113,13 +186,12 @@
                         @if ($field->field_type === 'number')
                             {
                                 label: '{{ $field->field_name }}',
-                                data: records{{ $table->id }}.map(record => record.data[
-                                    '{{ $field->field_name }}']),
+                                data: records{{ $table->id }}.map(record => record.data['{{ $field->field_name }}']),
                                 backgroundColor: getColorSet({{ $index }})[{{ $fieldIndex % 3 }}] + '80',
                                 borderColor: getColorSet({{ $index }})[{{ $fieldIndex % 3 }}],
                                 borderWidth: 2,
                                 fill: true,
-                                tension: 0.4 // Adding tension for smoother lines in line charts
+                                tension: 0.4
                             },
                         @endif
                     @endforeach
@@ -128,10 +200,11 @@
 
             const ctx{{ $table->id }} = document.getElementById('chart-{{ $table->id }}').getContext('2d');
             charts['chart-{{ $table->id }}'] = new Chart(ctx{{ $table->id }}, {
-                type: 'bar', // Default to bar
+                type: 'bar',
                 data: chartData{{ $table->id }},
                 options: {
                     responsive: true,
+                    maintainAspectRatio: false,
                     scales: {
                         y: {
                             beginAtZero: true,
@@ -172,8 +245,7 @@
             const selectedMonth = monthFilter.value;
 
             @foreach ($tables as $table)
-                const filteredRecords{{ $table->id }} = selectedMonth ? records{{ $table->id }}.filter(record =>
-                    record.month === selectedMonth) : records{{ $table->id }};
+                const filteredRecords{{ $table->id }} = selectedMonth ? records{{ $table->id }}.filter(record => record.month === selectedMonth) : records{{ $table->id }};
                 const filteredChartData{{ $table->id }} = {
                     labels: filteredRecords{{ $table->id }}.map(record => record.month),
                     datasets: chartData{{ $table->id }}.datasets.map(dataset => ({
@@ -198,6 +270,41 @@
         document.addEventListener('DOMContentLoaded', function() {
             updateCharts();
         });
+
+
+        function showSelectedChart() {
+    const selectedChart = document.getElementById('chartSelector').value;
+    const chartWrappers = document.querySelectorAll('.chart-wrapper');
+    
+    chartWrappers.forEach(wrapper => {
+        if (selectedChart === 'all') {
+            wrapper.style.display = 'block';
+            wrapper.classList.remove('full-width');
+            wrapper.querySelector('.chart-container').style.height = '350px';
+        } else if (wrapper.dataset.chartId === selectedChart) {
+            wrapper.style.display = 'block';
+            wrapper.classList.add('full-width');
+            wrapper.querySelector('.chart-container').style.height = '600px';
+        } else {
+            wrapper.style.display = 'none';
+        }
+    });
+
+    // Memperbarui tata letak grafik yang ditampilkan
+    Object.values(charts).forEach(chart => {
+        chart.resize();
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    updateCharts();
+    showSelectedChart(); // Panggil ini untuk menginisialisasi tampilan
+});
+
+// Tambahkan event listener untuk perubahan ukuran window
+window.addEventListener('resize', function() {
+    showSelectedChart();
+});
     </script>
 </body>
 

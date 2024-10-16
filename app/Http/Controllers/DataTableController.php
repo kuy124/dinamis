@@ -111,7 +111,7 @@ class DataTableController extends Controller
         $records = $table->records()->get();
 
         $records = $records->sortBy(function ($record) use ($months) {
-            return $months[$record->month] ?? 0; 
+            return $months[$record->month] ?? 0;
         });
 
         return view('user.show', compact('table', 'records'));
@@ -126,11 +126,12 @@ class DataTableController extends Controller
         ];
 
         // Dapatkan semua field untuk validasi
+        // Inside addRecord and updateRecord methods:
         foreach ($table->fields as $field) {
             $rule = 'required';
             switch ($field->field_type) {
                 case 'number':
-                    $rule .= '|numeric';
+                    $rule .= '|numeric|regex:/^\d+(\.\d{1,2})?$/'; // Allow decimal numbers
                     break;
                 case 'date':
                     $rule .= '|date';
@@ -140,6 +141,7 @@ class DataTableController extends Controller
             }
             $validationRules[$field->field_name] = $rule;
         }
+
 
         $validated = $request->validate($validationRules);
 
@@ -174,7 +176,7 @@ class DataTableController extends Controller
             $rule = 'required';
             switch ($field->field_type) {
                 case 'number':
-                    $rule .= '|numeric';
+                    $rule .= '|numeric|regex:/^\d+(\.\d{1,2})?$/'; // Allow decimal numbers
                     break;
                 case 'date':
                     $rule .= '|date';
@@ -184,6 +186,7 @@ class DataTableController extends Controller
             }
             $validationRules[$field->field_name] = $rule;
         }
+
 
         $validated = $request->validate($validationRules);
 
