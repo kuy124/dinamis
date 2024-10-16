@@ -143,7 +143,6 @@ class DataTableController extends Controller
 
         $validated = $request->validate($validationRules);
 
-        // Buat rekaman dengan field bulan
         TableRecord::create([
             'data_table_id' => $table->id,
             'month' => $validated['month'],

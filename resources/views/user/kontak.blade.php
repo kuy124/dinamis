@@ -13,7 +13,7 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 50px auto;
             padding: 20px;
         }
@@ -22,7 +22,9 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative; /* For positioning the button */
             overflow: hidden;
+            padding-bottom: 50px; /* For spacing at the bottom */
         }
 
         .card-header {
@@ -45,7 +47,11 @@
 
         .col-md-6 {
             flex: 1;
-            min-width: 300px;
+            min-width: 400px;
+        }
+
+        .col-md-6.map {
+            flex: 2;
         }
 
         h5 {
@@ -77,7 +83,7 @@
         .map-container {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+            padding-bottom: 65%;
         }
 
         .map-container iframe {
@@ -87,6 +93,25 @@
             width: 100%;
             height: 100%;
             border: 0;
+        }
+
+        /* Style for the back button */
+        .back-button {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -101,9 +126,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <h5>Our Contact Information</h5>
-                    <p>Email: info@example.com</p>
-                    <p>Phone: +123456789</p>
-                    <p>Address: 123 Street, City, Country</p>
+                    <p>Email: <a href="mailto:averroesrillo12@gmail.com">averroesrillo12@gmail.com</a></p> <!-- Mailto link -->
+                    <p>No. Telp: +62 896-3690-9084</p>
+                    <p>Alamat: <b>Sudin Kominfotik Jakarta Timur</b>
+                        Blok B1 lantai 3 Kantor Wali Kota Jakarta Timur RT.11, RT.11/RW.8, Pulo Gebang, Cakung, Kota Jakarta Timur, Jakarta 13950</p>
                     <p>Follow us on:</p>
                     <ul>
                         <li><a href="#">Facebook</a></li>
@@ -111,16 +137,18 @@
                         <li><a href="#">Instagram</a></li>
                     </ul>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 map">
                     <h5>Our Location</h5>
                     <div class="map-container">
                         <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.911473009881!2d-122.08424968423684!3d37.42206527982509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb710cf76a8f7%3A0x5f5695068b6c4c9b!2sGoogleplex!5e0!3m2!1sen!2sid!4v1628165435608!5m2!1sen!2sid" 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.375639028955!2d106.94159487499026!3d-6.214090693773825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e698d70059c8b3f%3A0x207cb9a26106d5f9!2sSudin%20Kominfotik%20Jakarta%20Timur!5e0!3m2!1sid!2sid!4v1729042655580!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" 
                             allowfullscreen="" loading="lazy"></iframe>
-                    </div>
+                    </div>  
                 </div>
             </div>
         </div>
+        <!-- Back button at the bottom-left corner -->
+        <a href="{{ url('/') }}" class="back-button">Back</a>
     </div>
 </div>
 
