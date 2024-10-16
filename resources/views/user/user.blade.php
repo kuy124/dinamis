@@ -295,7 +295,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Auto-hide success alert after 3 seconds
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(function() {
                 var alertElement = document.querySelector('.alert-success');
@@ -308,7 +307,6 @@
             }, 3000);
         });
 
-        // Add smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -330,7 +328,6 @@
 
         document.getElementById('current-date').textContent = formatDate(new Date());
 
-        // Add hover effect to cards
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
             card.addEventListener('mouseenter', () => {

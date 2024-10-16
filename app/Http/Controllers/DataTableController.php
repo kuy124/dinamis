@@ -27,6 +27,12 @@ class DataTableController extends Controller
         return view('tables.create');
     }
 
+    public function kontak()
+    {
+        return view('user.kontak');
+    }
+
+
     public function destroy(DataTable $table)
     {
         $table->delete();

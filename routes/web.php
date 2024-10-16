@@ -23,6 +23,7 @@ Route::middleware('auth')->group(function () {
 
 // BUAT USER
 Route::get('/charts', [DataTableController::class, 'charts'])->name('charts');
+Route::get('/kontak', [DataTableController::class, 'kontak'])->name('kontak');
 Route::get('/', function () {
     return view('landing');
 })->name('landing');
