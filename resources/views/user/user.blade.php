@@ -49,6 +49,7 @@
 
         .sidebar-menu li {
             padding: 10px 20px;
+            font-size: 2
         }
 
         .sidebar-menu li a {
@@ -56,6 +57,11 @@
             text-decoration: none;
             display: flex;
             align-items: center;
+        }
+
+        .sidebar-menu li a:hover, 
+        .sidebar-menu li a:focus {
+            color: rgb(0, 0, 0); /* Ganti dengan warna yang Anda inginkan */
         }
 
         .sidebar-menu li a i {
@@ -91,7 +97,7 @@
         }
 
         .stats-value {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--accent-color);
         }

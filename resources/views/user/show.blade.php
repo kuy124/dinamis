@@ -20,23 +20,24 @@
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
             transition: transform 0.3s;
         }
-        .card:hover {
+        /* .card:hover {
             transform: translateY(-5px);
-        }
+        } */
         .table th {
             background-color: #4e73df;
             color: white;
         }
-        .table-hover tbody tr:hover {
+        /* .table-hover tbody tr:hover {
             background-color: #ecf0f1;
-        }
+        } */
         .btn-custom {
             border-radius: 20px;
             padding: 10px 20px;
             transition: all 0.3s;
         }
         .btn-custom:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
+            /* transform: translateY(-2px); */
         }
         .animate-fade {
             animation: fadeIn 0.5s;

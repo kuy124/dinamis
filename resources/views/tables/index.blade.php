@@ -92,7 +92,7 @@
         }
 
         .stats-value {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--accent-color);
         }
