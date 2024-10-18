@@ -62,6 +62,11 @@
             margin-right: 10px;
         }
 
+        .sidebar-menu li a:hover, 
+        .sidebar-menu li a:focus {
+            color: rgb(0, 5, 158); /* Ganti dengan warna yang Anda inginkan */
+        }
+
         .main-content {
             margin-left: 250px;
             padding: 20px;

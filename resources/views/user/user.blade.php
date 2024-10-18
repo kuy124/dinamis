@@ -49,7 +49,7 @@
 
         .sidebar-menu li {
             padding: 10px 20px;
-            font-size: 2
+            font-size: 1rem;
         }
 
         .sidebar-menu li a {
@@ -61,7 +61,7 @@
 
         .sidebar-menu li a:hover, 
         .sidebar-menu li a:focus {
-            color: rgb(0, 0, 0); /* Ganti dengan warna yang Anda inginkan */
+            color: rgb(0, 5, 158); /* Ganti dengan warna yang Anda inginkan */
         }
 
         .sidebar-menu li a i {
