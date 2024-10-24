@@ -9,12 +9,11 @@ use Illuminate\Support\Facades\Auth;
 class AdminMiddleware
 {
     public function handle(Request $request, Closure $next)
-{
-    if (!Auth::check() || !Auth::user()->is_admin) {
-        return redirect('/'); // Redirect if not admin
+    {
+        if (!Auth::check() || !Auth::user()->is_admin) {
+            return redirect('/'); // Redirect if not admin
+        }
+
+        return $next($request);
     }
-
-    return $next($request);
-}
-
 }
